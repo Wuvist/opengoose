@@ -21,6 +21,10 @@ class OpengoosePluginFunctionalTest {
             plugins {
                 id('opengoose.greeting')
             }
+            
+            goose {
+                message = 'Hi'
+            }
         """)
 
         // Run the build
@@ -32,6 +36,6 @@ class OpengoosePluginFunctionalTest {
         val result = runner.build();
 
         // Verify the result
-        assertTrue(result.output.contains("Hello from plugin 'opengoose.greeting'"))
+        assertTrue(result.output.contains("Hello from plugin 'opengoose': Hi"))
     }
 }

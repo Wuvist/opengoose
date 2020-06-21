@@ -3,19 +3,26 @@
  */
 package opengoose
 
-import org.gradle.api.Project
 import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+open class GreetingPluginExtension(var message: String = "greeting") {
+
+}
 
 /**
  * A simple 'hello world' plugin.
  */
-class OpengoosePlugin: Plugin<Project> {
+class OpengoosePlugin : Plugin<Project> {
     override fun apply(project: Project) {
+        val extension = project.extensions.create("goose", GreetingPluginExtension::class.java)
+
         // Register a task
         project.tasks.register("greeting") { task ->
             task.doLast {
-                println("Hello from plugin 'opengoose.greeting'")
+                println("Hello from plugin 'opengoose': ${extension.message}")
             }
         }
     }
 }
+
